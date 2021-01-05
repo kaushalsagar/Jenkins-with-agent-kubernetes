@@ -31,16 +31,26 @@ Step-1)   Create three PVC ( jenkins-aws-credentials  ,  jenkins-aws-kubeconfig 
 Refer jenkins-pvc.yaml as per your environment.
 
 
-Jenkins Installation using Helm
--------------------------------
+                                                  Jenkins Installation using Helm
+                                                  -------------------------------
+
+
+
+
+Edit jenkins-stable.yaml and edit line number 74,75 according to your username and password for Jenkins.
+
+Edit jenkins-stable.yaml and edit line number 224,225 and add your jenkins-agent-image-name and its version.
+
+
+
+
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+
 Kubectl create ns jenkins
+
 helm install jenkins stable/jenkins -n jenkins -f jenkins-stable-values.yaml
 
 
-
-
-Step 1)  Create an image using Dockerfile as  jenkins-agent:stable
 
 Step 2) Create a pipeline that runs around 20 mins so that you can exec into jenkins slave pod and copy your kubeconfig file as 
         /root/.kube/config 
