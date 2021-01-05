@@ -6,9 +6,18 @@
 
 Docker build and push
 ---------------------
+
+
 docker build -f Dockerfile -t your_account_user/customize-jenkins-agent:latest .
+
 docker login
+
+
 docker push your_account_user/customize-jenkins-agent:latest
+
+
+
+
 
 
                                                   Step-2
