@@ -54,4 +54,12 @@ Refer jenkins-pvc.yaml as per your environment.
 
 Create a pipeline that runs around 20 mins so that you can exec into jenkins slave pod and copy your kubeconfig file as /root/.kube/config 
         and aws credential file as /root/.aws/credentials
-
+        
+      
+                                                  Sample Attachment Files
+                                                  -----------------------
+                                                  
+ 1) First Job 
+ 2) Sample Java Maven Job With Dockerfile as Dockerfile-spring
+ 3) Sample React Job With Dockerfile as Dockerfile-react
+ 
