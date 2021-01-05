@@ -12,7 +12,6 @@ docker build -f Dockerfile -t your_account_user/customize-jenkins-agent:latest .
 
 docker login
 
-
 docker push your_account_user/customize-jenkins-agent:latest
 
 
@@ -24,15 +23,11 @@ docker push your_account_user/customize-jenkins-agent:latest
                                                   ------
                                                   
 
+Step-1)   Create three PVC ( jenkins-aws-credentials  ,  jenkins-aws-kubeconfig  , jenkins-slave-pvc-maven ) using efs as persistence storage 
 
-commands:
---------
+* Here we are using efs storage so that our jenkins agent pod can schedule on any node.
+* If we use block storage then there is a case jenkins agent start on different node which might be on different availability zone and in AWS block storage are specific to         availability zone.
 
-Docker build and push
----------------------
-docker build -t your_account_user/customize-jenkins-agent:latest
-docker login
-docker push your_account_user/customize-jenkins-agent:latest
 
 
 Jenkins Installation using Helm
