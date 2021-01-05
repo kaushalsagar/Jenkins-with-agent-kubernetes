@@ -1,0 +1,65 @@
+pipeline {
+  agent any 
+  environment
+  {
+  
+  VERSION = "${BUILD_NUMBER}"
+  PROJECT = 'sample-react'
+  IMAGE = "$PROJECT:$VERSION"
+  ECRREGION = 'xxxxxxxxxxxx.dkr.ecr.ap-south-1.amazonaws.com'
+  ECRURL = 'https://xxxxxxxxxxxx.dkr.ecr.ap-south-1.amazonaws.com/sample-react'
+  ECRCRED = 'ecr:ap-south-1:aws-ecr'
+  
+  }
+  stages {  
+       stage('Git check out source code'){
+	   steps{
+		git branch: 'master', credentialsId: 'gitlab', url: 'Your github repository'
+         echo 'Git Check-Out Succcessfully Completed '
+         sh 'pwd'
+	        }
+        }
+       
+  
+  
+  
+  stage('Image Build'){
+	   steps{
+		      sh "docker build -t ${IMAGE} -f Dockerfile-react --network=host ."
+	        }
+        }
+	   
+	   stage('Pushing Image to ECR'){
+	   steps{
+	   script{
+	   docker.withRegistry(ECRURL, ECRCRED)
+	   {
+	   docker.image(IMAGE).push()
+	   
+	   }
+	   }
+	   }
+	   }
+	   
+	   
+	   stage('Remove Image'){
+	   steps{
+	   
+	          sh "docker image rm -f xxxxxxxxxxxx.dkr.ecr.ap-south-1.amazonaws.com/sample-react:${env.BUILD_NUMBER}"
+		  sh "docker image rm -f  ${IMAGE}"
+	        }
+        }
+  
+stage('Deployment To Kubernetes Cluster')
+ {
+     steps
+     {  
+       echo "Deploying Image to Kubernetes Cluster" 
+       sh 'cat    deployment-file | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
+        echo "Deployment Done Successfully................."
+	   
+        
+     }
+ }
+      }
+  }
