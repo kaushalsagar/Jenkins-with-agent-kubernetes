@@ -64,6 +64,12 @@ Refer jenkins-pvc.yaml as per your environment.
 
 Create a pipeline that runs around 20 mins so that you can exec into jenkins slave pod and copy your kubeconfig file as /root/.kube/config 
         and aws credential file as /root/.aws/credentials
+
+commands:
+
+#kubectl cp config jenkins/default-XXXXX:/root/.kube/config
+
+#kubectl cp credentials jenkins/default-XXXXX:/root/.aws/credentials
         
       
                                                   Sample Attachment Files
