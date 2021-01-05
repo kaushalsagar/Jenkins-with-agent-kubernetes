@@ -1,0 +1,13 @@
+pipeline {
+  agent any 
+  
+  stages {  
+      
+	   stage('First Stage running for 20 Mins to copy Kubeconfig file and aws credential file using kubectl exec -it 'podname' sh){
+	   steps{
+	   
+	          sh "sleep 1200"
+	        }
+        }
+       }
+  }
