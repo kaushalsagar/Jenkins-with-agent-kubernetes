@@ -72,6 +72,8 @@ commands:
 
 #kubectl cp config jenkins/default-XXXXX:/root/.kube/config
 
+
+
 #kubectl cp credentials jenkins/default-XXXXX:/root/.aws/credentials
         
       
