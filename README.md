@@ -5,7 +5,7 @@
 
       
 **prerequisite
-AWS EFS should be provisioned on EKS Cluster
+AWS EFS should be provisioned on EKS Cluster or You can use block storage but in that case you have to use nodeSelector property in values file(jenkins-stable.yaml)
 
 
 
