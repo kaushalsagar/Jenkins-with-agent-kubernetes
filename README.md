@@ -1,5 +1,11 @@
 # stable-jenkins-aws
 
+**prerequisite
+AWS EFS should be provisioned on EKS Cluster
+
+
+
+
 
                                                   Step-1
                                                   ------
