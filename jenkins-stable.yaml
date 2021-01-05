@@ -72,7 +72,7 @@ master:
      </authorizationStrategy>
   hostNetworking: false
   adminUser: "admin"
-  adminPassword: "Se2fc@re"
+  adminPassword: "admin"
   admin:
     existingSecret: ""
     userKey: jenkins-admin-user
@@ -138,6 +138,7 @@ master:
     - blueocean:1.23.2
     - kubernetes-cd:2.3.0
     - kubernetes-cli:1.8.3
+    - amazon-ecr:1.6
 
   additionalPlugins: []
 
@@ -221,7 +222,7 @@ master:
 
 agent:
   enabled: true
-  image: "834307743609.dkr.ecr.ap-south-1.amazonaws.com/jenkins-slave"
+  image: "your_account_user/customize-jenkins-agent:latest"
   tag: "latest"
   workingDir: "/home/jenkins"
   customJenkinsLabels: []
