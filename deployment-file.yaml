@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sample-reactapp
+  name: sample-reactapp
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-reactapp
+  template:
+    metadata:
+      labels:
+        app: sample-reactapp
+      name: sample-reactapp
+    spec:
+      containers:
+      - image: xxxxxxxxxxxx.dkr.ecr.ap-south-1.amazonaws.com/sample-react:{{env.BUILD_NUMBER}}
+        imagePullPolicy: IfNotPresent
+        name: sample-reactapp
+        ports:
+        - containerPort: 80
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-reactapp-svc-cip
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: sample-reactapp
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-reactapp-svc-np
+  namespace: default
+spec:
+  ports:
+  - nodePort: 31108
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: sample-reactapp
+  sessionAffinity: None
+  type: NodePort
