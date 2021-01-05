@@ -28,6 +28,7 @@ Step-1)   Create three PVC ( jenkins-aws-credentials  ,  jenkins-aws-kubeconfig 
 * Here we are using efs storage so that our jenkins agent pod can schedule on any node.
 * If we use block storage then there is a case jenkins agent start on different node which might be on different availability zone and in AWS block storage are specific to         availability zone.
 
+Refer jenkins-pvc.yaml as per your environment.
 
 
 Jenkins Installation using Helm
