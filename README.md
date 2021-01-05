@@ -1,5 +1,9 @@
-# stable-jenkins-aws
+# A Jenkins System with Jenkins Master and Agent both running on Pod and agent pod will created based on job, Whenever job is completed, the pod will destroy.
+# Agent pod will be having Kubectl, maven, aws-iam-authenticator, aws-cli installed.
 
+
+
+      
 **prerequisite
 AWS EFS should be provisioned on EKS Cluster
 
