@@ -1,0 +1,8 @@
+FROM openjdk:8-jre
+MAINTAINER "Sagar Kaushal"
+RUN mkdir /usr/sampleapp
+WORKDIR /usr/sampleapp
+RUN ln -sf /usr/share/zoneinfo/Asia/Calcutta /etc/localtime
+RUN dpkg-reconfigure -f noninteractive tzdata
+ADD  ./target/sample.jar /usr/sampleapp/sample.jar
+CMD ["java", "-jar","-Dspring.profiles.active=prod","/usr/sampleapp/sample.jar"]
