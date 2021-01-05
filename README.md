@@ -8,11 +8,11 @@ Docker build and push
 ---------------------
 
 
-docker build -f Dockerfile -t your_account_user/customize-jenkins-agent:latest .
+#docker build -f Dockerfile -t your_account_user/customize-jenkins-agent:latest .
 
-docker login
+#docker login
 
-docker push your_account_user/customize-jenkins-agent:latest
+#docker push your_account_user/customize-jenkins-agent:latest
 
 
 
@@ -37,18 +37,18 @@ Refer jenkins-pvc.yaml as per your environment.
 
 
 
-Edit jenkins-stable.yaml and edit line number 74,75 according to your username and password for Jenkins.
+*Edit jenkins-stable.yaml and edit line number 74,75 according to your username and password for Jenkins.
 
-Edit jenkins-stable.yaml and edit line number 224,225 and add your jenkins-agent-image-name and its version.
-
-
+*Edit jenkins-stable.yaml and edit line number 224,225 and add your jenkins-agent-image-name and its version.
 
 
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 
-Kubectl create ns jenkins
 
-helm install jenkins stable/jenkins -n jenkins -f jenkins-stable-values.yaml
+#helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+
+#Kubectl create ns jenkins
+
+#helm install jenkins stable/jenkins -n jenkins -f jenkins-stable-values.yaml
 
 
 
