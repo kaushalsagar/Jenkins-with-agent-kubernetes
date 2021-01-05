@@ -1,0 +1,74 @@
+pipeline {
+  agent any 
+  environment
+  {
+  
+  VERSION = "${BUILD_NUMBER}"
+  PROJECT = 'sample-java-springboot'
+  IMAGE = "$PROJECT:$VERSION"
+  ECRREGION = 'xxxxxxxxxxxx.dkr.ecr.ap-south-1.amazonaws.com'
+  ECRURL = 'https://xxxxxxxxxxxx.dkr.ecr.ap-south-1.amazonaws.com/sample-java-springboot'
+  ECRCRED = 'ecr:ap-south-1:aws-ecr'
+  
+  }
+  stages {  
+       stage('Git check out source code'){
+	   steps{
+		git branch: 'master', credentialsId: 'gitlab', url: 'your git url'
+         echo 'Git Check-Out Succcessfully Completed '
+         sh 'pwd'
+	        }
+        }
+       
+	   
+	   stage('Building binary file from source code')
+  {
+    steps
+	{   
+		sh 'mvn clean package  -Dmaven.test.skip=true'
+		echo 'Binary build'
+	}
+  }
+  
+  
+  
+  stage('Image Build'){
+	   steps{
+		      sh "docker build -t ${IMAGE} -f Dockerfile-spring ."
+	        }
+        }
+	   
+	   stage('Pushing Image to ECR'){
+	   steps{
+	   script{
+	   docker.withRegistry(ECRURL, ECRCRED)
+	   {
+	   docker.image(IMAGE).push()
+	   
+	   }
+	   }
+	   }
+	   }
+	   
+	   
+	   stage('Remove Image'){
+	   steps{
+	   
+	          sh "docker image rm -f xxxxxxxxxxxx.dkr.ecr.ap-south-1.amazonaws.com/sample-java-springboot:${env.BUILD_NUMBER}"
+		      sh "docker image rm -f  ${IMAGE}"
+	        }
+        }
+       stage('Deployment To Kubernetes Cluster')
+ {
+     steps
+     {  
+       echo "Deploying Image to Kubernetes Cluster" 
+       sh 'cat deployment-file | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
+        echo "Deployment Done Successfully................."
+	   
+        
+     }
+ }
+
+      }
+  }
