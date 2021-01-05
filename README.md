@@ -62,4 +62,5 @@ Create a pipeline that runs around 20 mins so that you can exec into jenkins sla
  1) First Job 
  2) Sample Java Maven Job With Dockerfile as Dockerfile-spring
  3) Sample React Job With Dockerfile as Dockerfile-react
+ 4) Sample deployment file as deployment-file
  
